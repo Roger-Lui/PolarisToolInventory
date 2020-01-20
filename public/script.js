@@ -43,7 +43,7 @@ document.querySelector(".modal-close").addEventListener("click", handleModal);
 
 function handleDelete(event) {
   const id = event.target.dataset.dbId;
-  fetch(`/tools?id=${id}`, { method: "DELETE", redirect: "follow" })
+  fetch(`/tools?id=${id}`, { method: "DELETE" })
     .then(res => {
       if (res.ok) window.location.reload();
     })
