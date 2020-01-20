@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>TOOLS</title>
+		<link rel="stylesheet" type="text/css" href="styletools.css">
+	</head>
+	<body>
+		<!-- --------HOME MENU------------>
+		<header class="container">
+			<nav>
+				<div>
+					<h1>TOOLS INVENTORY</h1>
+				</div>
+				<ul>
+					<li><a href="index.html">Home</a></li>
+					<li><a href="tools.html">Tools</a></li>
+					<li><a href="about.html">About</a></li>
+					<li><button class="button-coral modal-button" data-action="create" type="button">+ Add New Tool</button></li>
+					<li><button id="ping" class="button-coral" type="button">Ping Jarvas</button></li>
+				</ul>
+			</nav>
+		</header>
+	<!---------- SECTION-List of Tools ----------->
+		<div class="container tools-inventory">
+			<section id=tool-list></section>
+			<section id="tool-detail" data-db-id=''>
+				<ul class="tool-detail-list">
+					<li class="tool-detail-item">
+						<h4 class="hide">Name</h4>
+						<p id="name-js"></p>
+					</li>
+					<li class="tool-detail-item">
+						<h4 class="hide">Serial Number</h4>
+						<p id="serialNumber-js"></p>	
+					</li>
+					<li class="tool-detail-item">
+						<h4 class="hide">Storage Location</h4>
+						<p id="storageLocation-js"></p>		
+					</li>
+					<li class="tool-detail-item">
+						<h4 class="hide">Caliberation Interval</h4>
+						<p id="toolCal-js"></p>		
+					</li> 
+					<li class="tool-detail-item">
+						<h4 class="hide">Next Calibration</h4>
+						<p id="nextCalibration-js"></p>		
+					</li>
+					<li class="tool-detail-item">
+						<h4 class="hide">Extra Details</h4>		
+						<p id="toolsextradetails-js"></p>
+					</li>
+				</ul>
+				<button class="button-coral modal-button hide" data-action="update" type="button">Edit</button>
+			</section>
+		</div>
+		<!-- -----MODAL FORM--------- -->
+		<div class="modal hide">
+			<div class="modal-body"> 
+				<div class="modal-header">
+					<h2 class="modal-title">NEW TOOL</h2>
+					<div class="modal-close">&times;</div>
+				</div>
+				<form class="modal-form" action="/tools" method="POST"> 
+					<label class="modal-form-input-label" for="assigntoolid">Name</label>
+					<input class="modal-form-input" type="text" name="name" placeholder="Assign Tool's Name" required>
+					<label class="modal-form-input-label" for="assigntoolname">Serial Number</label>
+					<input class="modal-form-input" type="text" name="serialNumber" placeholder="Assign Tool's Serial Number" required>
+					<label class="modal-form-input-label" for="assigntoolstorage">Storage Location </label>
+					<input class="modal-form-input" type="text" name="storageLocation" placeholder="Assign Tool's Storage Location" required> 
+					<label class="modal-form-input-label" for="assigntoolCalibrationInterval">Calibration Interval </label>
+					<input class="modal-form-input" type="text" name="toolCal" placeholder="Enter Interval" required> 
+					<label class="modal-form-input-label" for="nextCalibration"> Next Calibration </label>
+					<input class="modal-form-input" type="text" name="nextCalibration" placeholder="Please Enter Date" required> 
+					<label class="modal-form-input-label" for="toolDetails">Tool's Extra Details </label> 
+					<input class="modal-form-input" type="text" name="toolsextradetails" placeholder="Tool's Details" required>
+					<input class="modal-form-submit" type="submit" value="Create" data-db-id=""/>
+				</form>
+			</div>
+		</div>
+
+	<!-- <div class="ryanbutton" > 
+		<button action="http://jarvas-api.herokuapp.com/location?x=3&y=4" method="POST">ryanbutton</button>
+	</div> -->
+
+		<script src="./script.js"></script>
+	</body>
+</html>
