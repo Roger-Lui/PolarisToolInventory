@@ -29,7 +29,6 @@ app.get("/tools", function(request, response) {
   console.log("GET request received at /tools");
 
   db.all("SELECT rowid, * FROM tools", function(err, rows) {
-    // console.log(rows);
     if (err) {
       console.log("Error:" + err);
     } else {
