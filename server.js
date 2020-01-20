@@ -89,6 +89,18 @@ app.put("/tools", function(request, response) {
   );
 });
 
+app.delete("/tools", function(request, response) {
+  const id = request.query.id;
+  db.run("DELETE FROM tools WHERE rowid = ?;", [id], function(err) {
+    if (err) {
+      console.log("Error: " + err);
+      response.status(400).redirect("index.html");
+    } else {
+      response.status(202).json({ message: "tool of id " + id + " deleted" });
+    }
+  });
+});
+
 app.listen(process.env.PORT || 3000, function() {
   const portNumber = process.env.PORT || 3000;
   console.log("Server is running on: " + portNumber);

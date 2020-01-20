@@ -41,6 +41,15 @@ document.querySelectorAll(".modal-button").forEach(function(element) {
 });
 document.querySelector(".modal-close").addEventListener("click", handleModal);
 
+function handleDelete(event) {
+  const id = event.target.dataset.dbId;
+  fetch(`/tools?id=${id}`, { method: "DELETE", redirect: "follow" })
+    .then(res => {
+      if (res.ok) window.location.reload();
+    })
+    .catch(err => console.error("Error when delete: ", err));
+}
+
 function showDetail(itemData) {
   Object.entries(itemData)
     .filter(keyValuePair => keyValuePair[0] !== "toolName")
@@ -52,11 +61,22 @@ function showDetail(itemData) {
       if (isEditButtonElementHidden) {
         editButtonElement.classList.remove("hide");
       }
+      const deleteButtonElement = document.querySelector(
+        '.button-coral[data-action="delete"]'
+      );
+      isDeleteButtonElementHidden = deleteButtonElement.classList.contains(
+        "hide"
+      );
+      if (isDeleteButtonElementHidden) {
+        deleteButtonElement.classList.remove("hide");
+      }
 
       if (key === "rowid") {
         const sectionToolDetailElement = document.querySelector("#tool-detail");
         sectionToolDetailElement.dataset.dbId = value;
         editButtonElement.dataset.dbId = value;
+        deleteButtonElement.dataset.dbId = value;
+        deleteButtonElement.addEventListener("click", handleDelete);
         return;
       }
 
