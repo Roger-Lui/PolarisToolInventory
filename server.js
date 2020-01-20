@@ -93,10 +93,3 @@ app.put("/tools", function(request, response) {
 app.listen(3000, function() {
   console.log("Server is running on port 3000");
 });
-
-app.post("http://jarvas-api.herokuapp.com/location?x=3&y=4", function(
-  request,
-  response
-) {
-  console.log("HEROKU YEAH");
-});
