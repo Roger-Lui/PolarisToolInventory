@@ -10,7 +10,6 @@ app.use(methodOverride("_method"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// delete query
 // db.run("DELETE FROM tools");
 
 // db.run("ALTER TABLE tools RENAME COLUMN toolNames TO name");
@@ -95,7 +94,9 @@ app.listen(3000, function() {
   console.log("Server is running on port 3000");
 });
 
-// app.post("http://jarvas-api.herokuapp.com/location?x=3&y=4",function(request,response){
-//   console.log("HEROKU YEAH");
-
-// });
+app.post("http://jarvas-api.herokuapp.com/location?x=3&y=4", function(
+  request,
+  response
+) {
+  console.log("HEROKU YEAH");
+});
