@@ -4,13 +4,17 @@
 	font-family: Century Gothic;
 }
 
-header
-{
-	background-image: url("4.jpg");
+html, body {
 	height: 100vh;
+	width:100%;
+}
+
+body{
+	background-image: url("./4.jpg");
 	background-size: cover;
 	background-position: center;
 }
+
 
 ul{
 	list-style-type: none;
