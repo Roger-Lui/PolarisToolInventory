@@ -49,7 +49,7 @@ function handleDelete(event) {
 }
 
 function showDetail(itemData) {
-  window.location.hash = itemData.name;
+  window.location.hash = itemData.rowid;
 
   Object.entries(itemData)
     .filter(keyValuePair => keyValuePair[0] !== "toolName")
@@ -130,6 +130,7 @@ function getTools() {
         const listItem = document.createElement("li"); // this creates <li></li>
         const button = document.createElement("button"); // this creates <button></button>
         button.textContent = data[i].name;
+        button.dataset.dbId = data[i].rowid;
 
         button.addEventListener("click", function(event) {
           showDetail(data[i]);
@@ -140,10 +141,10 @@ function getTools() {
       }
       section.append(list);
 
-      const toolName = decodeURI(window.location.hash).slice(1);
+      const toolId = decodeURI(window.location.hash).slice(1);
       const foundToolButtonElement = Array.from(
         document.querySelectorAll("#tool-list button")
-      ).find(element => element.textContent === toolName);
+      ).find(element => element.dataset.dbId === toolId);
 
       if (foundToolButtonElement) {
         foundToolButtonElement.click();
