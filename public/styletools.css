@@ -53,6 +53,10 @@ h3 {
 	z-index: -1;
 }
 
+h5{
+	color: #fff;
+}
+
 /* -----nav bar----- */
 nav {
 	display: flex;
@@ -309,9 +313,9 @@ left: 90px;
 /*------Login Modal------*/ 
 
 .loginmodal {
-	width: 100%;
+width: 100%;
 height: 100%;
-background-color: rgba(0,0,0,0.7);
+background-color: rgba(66, 66, 66, 0.377);
 position: absolute;
 top: 0;
 left: 0;
@@ -325,17 +329,17 @@ align-items: center;
 	width: 40%;
 	height: 300px;
 	padding: 20px 15px;
-	background-color: white;
+	background-color: rgba(0, 0, 0, 0.733);
 	border-radius: 5px;
 }
 
 .loginmodal form {
 
-	display: block;
 	text-align: center;
 	justify-content: center;
 	position: relative;
 	top: 30%;
+	color: #fff;
 }
 
 .loginheader
@@ -349,54 +353,47 @@ align-items: center;
 }
 
 .login {
-
 	width: 100%;
 	font-size: 20px;
 	font-family: Bahnschrift;
 }
 
-.loginuser
-{
+.loginuser {
 	padding-right: 20px;
 	margin: 10px;
 }
 
-.loginpass
-{
+.loginpass {
 	padding-right: 20px;
 	margin: 10px;
 }
 
-.usersubmit
-{
+.usersubmit {
 	margin-top: 30px;
 	padding: 4px 9px;
 	background-color: transparent;
 	border: 1px solid rgb(101, 231, 40);
 	border-radius: 4px;
-	color: rgb(0, 0, 0);	
+	color: rgb(252, 252, 252);	
 	cursor: pointer;
 }
 
-.resetlogin
-{
-
+.resetlogin {
 	padding: 4px 9px;
 	background-color: transparent;
 	border: 1px solid rgb(230, 26, 26);
 	border-radius: 4px;
-	color: rgb(0, 0, 0);	
+	color: rgb(255, 255, 255);	
 	cursor: pointer;
 }
 
-.backtomain
-{
+.backtomain {
 	width: 55px;
 	padding: 4px 9px;
 	background-color: transparent;
 	border: 1px solid rgb(26, 131, 230);
 	border-radius: 4px;
-	color: rgb(0, 0, 0);	
+	color: rgb(255, 255, 255);	
 	cursor: pointer;
 }
 
