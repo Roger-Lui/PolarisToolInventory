@@ -71,12 +71,36 @@ function showDetail(itemData) {
         deleteButtonElement.classList.remove("hide");
       }
 
+      const ping = document.querySelector(
+        '.button-ping[data-action= "ping"]'
+      );
+
+      isPingButtonHidden = ping.classList.contains("hide");
+
+      if (isPingButtonHidden) {
+        ping.classList.remove("hide");
+      }
+
+      const track = document.querySelector(
+        '.button-track[data-action= "track"]'
+      );
+
+      isTrackButtonHidden = track.classList.contains("hide");
+
+      if (isTrackButtonHidden) {
+       track.classList.remove("hide");
+      }
+
       if (key === "rowid") {
         const sectionToolDetailElement = document.querySelector("#tool-detail");
         sectionToolDetailElement.dataset.dbId = value;
         editButtonElement.dataset.dbId = value;
         deleteButtonElement.dataset.dbId = value;
         deleteButtonElement.addEventListener("click", handleDelete);
+        ping.dataset.dbId = value;
+        ping.addEventListener("click", handlePing2);
+        track.dataset.dbId = value;
+        track.addEventListener("click", handletrack);
         return;
       }
 
@@ -121,20 +145,73 @@ function getTools() {
 }
 getTools();
 
-function handlePing() {
-  fetch("http://jarvas-api.herokuapp.com/location?x=3&y=4", {
-    method: "POST"
-  })
-    .then(res => {
-      console.log(res.status);
+// function handlePing() {
+//   fetch("http://jarvas-api.herokuapp.com/location?x=3&y=4", {
+//     method: "POST"
+//   })
+//     .then(res => {
+//       console.log(res.status);
+//     })
+//     .catch(err =>
+//       console.error(
+//         "something went wrong when pinging. Response is not 200. Error: ",
+//         err
+//       )
+//     );
+// }
+
+// const pingButtonElement = document.querySelector("#ping");
+// pingButtonElement.addEventListener("click", handlePing);
+
+function handlePing2() {
+    fetch("http://jarvas-api.herokuapp.com/location?x=3&y=4", {
+      method: "POST"
     })
-    .catch(err =>
-      console.error(
-        "something went wrong when pinging. Response is not 200. Error: ",
-        err
-      )
-    );
+      .then(res => {
+        console.log(res.status);
+      })
+      .catch(err =>
+        console.error(
+          "something went wrong when pinging. Response is not 200. Error: ",
+          err
+        )
+      );
+  }
+  
+  // const pingButtonElement = document.querySelector("#ping");
+  // pingButtonElement.addEventListener("click", handlePing);
+  function handletrack() {
+    fetch("http://jarvas-api.herokuapp.com/location?x=3&y=4", {
+      method: "POST"
+    })
+      .then(res => {
+        console.log(res.status);
+      })
+      .catch(err =>
+        console.error(
+          "something went wrong when pinging. Response is not 200. Error: ",
+          err
+        )
+      );
+  }
+
+function check(form)/*function to check userid & password*/
+{
+ /*the following code checkes whether the entered userid and password are matching*/
+ if(form.userid.value == "Roger" && form.pswrd.value == "mypswrd")
+  {
+    window.open('tools.html')
+    window.close('login.html')
+  }
+ else
+ {
+   alert("Error Password or Username")/*displays error message*/
+  }
 }
 
-const pingButtonElement = document.querySelector("#ping");
-pingButtonElement.addEventListener("click", handlePing);
+function back()
+{
+    window.open('index.html')
+    window.close('login.html')
+}
+
