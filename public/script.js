@@ -206,7 +206,7 @@ function handletrack() {
 function check(form) {
   /*function to check userid & password*/
   /*the following code checkes whether the entered userid and password are matching*/
-  if (form.userid.value == "Roger" && form.pswrd.value == "mypswrd") {
+  if (form.userid.value == "1" && form.pswrd.value == "1") {
     window.open("tools.html");
     window.close("login.html");
   } else {

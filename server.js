@@ -2,6 +2,7 @@ var express = require("express");
 var app = express();
 var sqlite3 = require("sqlite3");
 var db = new sqlite3.Database("db/tools.db");
+var db2 = new sqlite3.Database("db/RSSIreadings.db");
 var bodyParser = require("body-parser");
 var methodOverride = require("method-override");
 
@@ -10,7 +11,13 @@ app.use(methodOverride("_method"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// db.run("DELETE FROM tools");
+db.run("DELETE FROM tools");
+//db2.run("DELETE FROM RSSI");
+// db2.run(`CREATE TABLE RSSI(
+//   Xreading TEXT,
+//   Yreading TEXT,
+//   tagId TEXT UNIQUE
+//   )`);
 
 // db.run("ALTER TABLE tools RENAME COLUMN toolNames TO name");
 // db.run("ALTER TABLE tools DROP COLUMN toolNames");
@@ -40,7 +47,7 @@ app.get("/tools", function(request, response) {
 app.post("/tools", function(request, response) {
   console.log("POST request received at /tools");
   db.run(
-    "INSERT INTO tools VALUES (?,?,?,?,?,?,?)",
+    "INSERT INTO tools VALUES (?,?,?,?,?,?,?,?)",
     [
       request.body.name,
       request.body.serialNumber,
@@ -48,7 +55,8 @@ app.post("/tools", function(request, response) {
       request.body.toolsextradetails,
       request.body.nextCalibration,
       request.body.toolCal,
-      request.body.name
+      request.body.toolName,
+      request.body.RSSI
     ],
 
     function(err) {
@@ -62,6 +70,7 @@ app.post("/tools", function(request, response) {
   );
 });
 
+// EDIT SECTION
 app.put("/tools", function(request, response) {
   const newData = request.body;
   const id = request.query.id;
@@ -74,7 +83,7 @@ app.put("/tools", function(request, response) {
       newData.toolsextradetails,
       newData.nextCalibration,
       newData.toolCal,
-      newData.name,
+      newData.toolName,
       id
     ],
 
@@ -89,6 +98,7 @@ app.put("/tools", function(request, response) {
   );
 });
 
+// DELETE SECTION
 app.delete("/tools", function(request, response) {
   const id = request.query.id;
   db.run("DELETE FROM tools WHERE rowid = ?;", [id], function(err) {
@@ -99,6 +109,31 @@ app.delete("/tools", function(request, response) {
       response.status(202).json({ message: "tool of id " + id + " deleted" });
     }
   });
+});
+
+//TESTING
+//CREATED TABLE RSSI IN RSSIreading.db
+
+// Xreading, Yreading, tagId, rowid
+// UPDATE RSSI SET Xreading=?, Yreading=?, WHERE tagId = tag1
+
+app.post("/RSSI", function(request, response) {
+  const queryParams = request.query;
+  console.log(queryParams);
+
+  db2.exec(
+    `INSERT INTO RSSI (Xreading, Yreading, tagId) VALUES(${queryParams.x},${queryParams.y}, ${queryParams.tagId}) ON CONFLICT(tagId) DO UPDATE SET Xreading=${queryParams.x} , Yreading=${queryParams.y}`,
+    function(err) {
+      if (err) {
+        console.log("Error: " + err);
+        response.status(400).json({
+          message: "something went wrong when saving data to RSSI table"
+        });
+      } else {
+        response.status(200).end();
+      }
+    }
+  );
 });
 
 app.listen(process.env.PORT || 3000, function() {
