@@ -11,7 +11,7 @@ app.use(methodOverride("_method"));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-db.run("DELETE FROM tools");
+// db.run("DELETE FROM tools");
 //db2.run("DELETE FROM RSSI");
 // db2.run(`CREATE TABLE RSSI(
 //   Xreading TEXT,
