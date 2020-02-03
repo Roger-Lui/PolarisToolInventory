@@ -4,7 +4,7 @@ function toggleModal() {
 }
 
 function updateModal(modalButtonElement) {
-  const action = modalButtonElement.dataset.action;
+  const action = modalButtonElement.dataset.action; //dataset
   const dbId = modalButtonElement.dataset.dbId;
 
   const modalSubmitInputElement = document.querySelector(".modal-form-submit");
@@ -14,6 +14,7 @@ function updateModal(modalButtonElement) {
   ).map(function(pElement) {
     //.map -> go through every thing inside query and put function inside
     return pElement.textContent;
+    
   });
   const modalFormInputElements = document.querySelectorAll(".modal-form-input");
 
@@ -50,10 +51,16 @@ function handleDelete(event) {
 
 function showDetail(itemData) {
   window.location.hash = itemData.rowid;
-
+  console.log(itemData)
   Object.entries(itemData)
-    .filter(keyValuePair => keyValuePair[0] !== "toolName")
+    .filter(keyValuePair => {
+      console.log(keyValuePair);
+      if (keyValuePair[0] !== "toolName" || keyValuePair[0] !== "RSSI")
+        return true;
+      return false;
+    })
     .map(([key, value]) => {
+      console.log(key);
       const editButtonElement = document.querySelector(
         '.modal-button[data-action="update"]'
       );
@@ -80,7 +87,7 @@ function showDetail(itemData) {
       }
 
       const track = document.querySelector(
-        '.button-track[data-action= "track"]'
+        '.button-track[data-action="track"]'
       );
 
       isTrackButtonHidden = track.classList.contains("hide");
@@ -89,6 +96,11 @@ function showDetail(itemData) {
         track.classList.remove("hide");
       }
 
+      // if (key === "tagId") {
+      //   track.dataset.tagId = value;
+      //   return;
+      // }
+
       if (key === "rowid") {
         const sectionToolDetailElement = document.querySelector("#tool-detail");
         sectionToolDetailElement.dataset.dbId = value;
@@ -96,9 +108,9 @@ function showDetail(itemData) {
         deleteButtonElement.dataset.dbId = value;
         deleteButtonElement.addEventListener("click", handleDelete);
         ping.dataset.dbId = value;
-        ping.addEventListener("click", handlePing2);
+        ping.addEventListener("click", handlePing2); 
         track.dataset.dbId = value;
-        track.addEventListener("click", handletrack);
+        track.addEventListener("click", handletrack); 
         return;
       }
 
@@ -153,7 +165,57 @@ function getTools() {
 }
 getTools();
 
-function handlePing() {
+// function sendCoordsToJarvas(x, y) {
+//   fetch(`http://jarvas-api.herokuapp.com/location?x=${x}&y=${y}`, {
+//     method: "POST"
+//   })
+//     .then(res => {
+//       console.log(res.status);
+//     })
+//     .catch(err => {
+//       console.error(
+//         "something went wrong when sending coords to Jarvas: ",
+//         err
+//       );
+//     });
+// }
+
+// function getRSSIfromdb(tagId) {
+//   fetch(`/RSSI?tagId=${tagId}`)
+//     .then(response => response.json())
+//     .then(data => {
+//       sendCoordsToJarvas(data.Xreading, data.Yreading);
+//     })
+//     .catch(err =>
+//       console.error(
+//         "something went wrong when getting RSSI coords. Error: ",
+//         err
+//       )
+//     );
+// }
+
+// function handlePing() {
+//   console.log("pinging...")
+//   fetch("http://172.20.10.9/LED=OFF", {
+//     method: "POST"
+//   })
+//     .then(res => {
+//       console.log("POSTED SUCCESSFULLY")
+//       console.log(res.status);
+//     })
+//     .catch(err =>
+//       console.error(
+//         "something went wrong when pinging. Response is not 200. Error: ",
+//         err
+//       )
+//     );
+// }
+
+// const pingButtonElement = document.querySelector("#ping");
+// pingButtonElement.addEventListener("click", handlePing);
+
+function handlePing2() {
+  console.log("pinging...")
   fetch("http://172.20.10.9/LED=OFF", {
     method: "POST"
   })
@@ -168,40 +230,67 @@ function handlePing() {
     );
 }
 
-const pingButtonElement = document.querySelector("#ping");
-pingButtonElement.addEventListener("click", handlePing);
-
-function handlePing2() {
-  fetch("http://jarvas-api.herokuapp.com/location?x=3&y=4", {
+// TRACK BUTTONS
+function sendIpaddress(tagIP)
+{
+  console.log("posting...")
+  fetch(`http://${tagIP}/1`, {
     method: "POST"
   })
-    .then(res => {
-      console.log(res.status);
+  .then(res => {
+    console.log(res.status);
+  })
+  .catch(err =>
+    console.error(
+      "something went wrong when sending to IP ADDRESS. Response is not 200. Error: ",
+      err
+    )
+  );
+
+}
+
+function gettagIdfromtools(tagId)
+{
+  console.log("Retrieving Data From DataBase...")
+  fetch(`/tools?tagId=${tagId}`)
+  
+    .then(response => response.json())
+    .then(data => {
+      sendIpaddress(data.tagId);
+      console.log(data.tagId)
     })
     .catch(err =>
       console.error(
-        "something went wrong when pinging. Response is not 200. Error: ",
-        err
+        "something went wrong when getting RSSI coords. Error: ",
+        err  
       )
     );
+
 }
 
-// const pingButtonElement = document.querySelector("#ping");
-// pingButtonElement.addEventListener("click", handlePing);
+const trackButtonElement = document.querySelector("#track");
+// trackButtonElement.addEventListener("click", handletrack);
+
 function handletrack() {
-  fetch("http://jarvas-api.herokuapp.com/location?x=3&y=4", {
-    method: "POST"
-  })
-    .then(res => {
-      console.log(res.status);
-    })
-    .catch(err =>
-      console.error(
-        "something went wrong when pinging. Response is not 200. Error: ",
-        err
-      )
-    );
+  console.log("tracking...")
+  gettagIdfromtools()
 }
+
+
+// function handletrack() {
+//   fetch("http://jarvas-api.herokuapp.com/location?x=3&y=4", {
+//     method: "POST"
+//   })
+//     .then(res => {
+//       console.log(res.status);
+//     })
+//     .catch(err =>
+//       console.error(
+//         "something went wrong when pinging. Response is not 200. Error: ",
+//         err
+//       )
+//     );
+// }
 
 function check(form) {
   /*function to check userid & password*/

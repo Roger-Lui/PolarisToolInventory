@@ -19,7 +19,7 @@
 					<li><a href="tools.html">Tools</a></li>
 					<li><a href="about.html">About</a></li>
 					<li><button class="button-coral modal-button" data-action="create" type="button">+ Add New Tool</button></li>
-					<li><button id="ping" class="button-coral" type="button">Ping Jarvas</button></li>
+					<!-- <li><button id="ping" class="button-coral" type="button">Ping Jarvas</button></li> -->
 				</ul>
 			</nav>
 		</header>
@@ -28,30 +28,36 @@
 			<section id=tool-list></section>
 			<section id="tool-detail" data-db-id=''>
 				<ul class="tool-detail-list">
+
 					<li class="tool-detail-item">
-						<h4 class="hide">Name</h4>
+						<h4 class="hide">NAME</h4>
 						<p id="name-js"></p>
 					</li>
 					<li class="tool-detail-item">
-						<h4 class="hide">Serial Number</h4>
+						<h4 class="hide">SERIAL NUMBER</h4>
 						<p id="serialNumber-js"></p>	
 					</li>
 					<li class="tool-detail-item">
-						<h4 class="hide">Storage Location</h4>
+						<h4 class="hide">STORAGE LOCATION</h4>
 						<p id="storageLocation-js"></p>		
 					</li>
 					<li class="tool-detail-item">
-						<h4 class="hide">Caliberation Interval</h4>
+						<h4 class="hide">LAST CALIBRATION</h4>
 						<p id="toolCal-js"></p>		
 					</li> 
 					<li class="tool-detail-item">
-						<h4 class="hide">Next Calibration</h4>
+						<h4 class="hide">NEXT CALIBRATION</h4>
 						<p id="nextCalibration-js"></p>		
 					</li>
 					<li class="tool-detail-item">
-						<h4 class="hide">Extra Details</h4>		
+						<h4 class="hide">EXTRA DETAILS</h4>		
 						<p id="toolsextradetails-js"></p>
 					</li>
+					<li class="tool-detail-item">
+						<h4 class="hide">TAG IP ADDRESS</h4>		
+						<p id="tagId-js"></p>
+					</li>
+					
 				</ul>
 				<div class="buttonsindetaillist">
 				<button class="button-coral modal-button hide" data-action="update" type="button">Edit</button>
@@ -80,7 +86,9 @@
 					<label class="modal-form-input-label" for="nextCalibration"> Next Calibration </label>
 					<input class="modal-form-input" type="text" name="nextCalibration" placeholder="Please Enter Date" required> 
 					<label class="modal-form-input-label" for="toolDetails">Tool's Extra Details </label> 
-					<input class="modal-form-input" type="text" name="toolsextradetails" placeholder="Tool's Details" required>
+					<input class="modal-form-input" type="text" name="toolsextradetails" placeholder="Tool's Extra Details" required>
+					<label class="modal-form-input-label" for="tagId">Tag Ip Address</label> 
+					<input class="modal-form-input" type="text" name="tagId" placeholder="Tag's IP Address" required>
 					<input class="modal-form-submit" type="submit" value="Create" data-db-id=""/>
 				</form>
 			</div>
