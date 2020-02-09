@@ -193,6 +193,8 @@ getTools();
 //       )
 //     );
 // }
+// const pingButtonElement = document.querySelector("#ping");
+// pingButtonElement.addEventListener("click", handlePing);
 
 // function handlePing() {
 //   console.log("pinging...")
@@ -211,13 +213,13 @@ getTools();
 //     );
 // }
 
-// const pingButtonElement = document.querySelector("#ping");
-// pingButtonElement.addEventListener("click", handlePing);
+
+// 
 
 function handlePing2() {
   console.log("pinging...")
-  fetch("http://172.20.10.9/LED=OFF", {
-    method: "POST"
+  fetch("http://172.20.10.9/LED=ON", {
+    method: "GET"
   })
     .then(res => {
       console.log(res.status);
@@ -230,24 +232,24 @@ function handlePing2() {
     );
 }
 
-// TRACK BUTTONS
-function sendIpaddress(tagIP)
-{
-  console.log("posting...")
-  fetch(`http://${tagIP}/1`, {
-    method: "POST"
-  })
-  .then(res => {
-    console.log(res.status);
-  })
-  .catch(err =>
-    console.error(
-      "something went wrong when sending to IP ADDRESS. Response is not 200. Error: ",
-      err
-    )
-  );
+// // TRACK BUTTONS
+// function sendIpaddress(tagIP)
+// {
+//   console.log("posting...")
+//   fetch(`http://${tagIP}/1`, {
+//     method: "POST"
+//   })
+//   .then(res => {
+//     console.log(res.status);
+//   })
+//   .catch(err =>
+//     console.error(
+//       "something went wrong when sending to IP ADDRESS. Response is not 200. Error: ",
+//       err
+//     )
+//   );
 
-}
+// }
 
 function gettagIdfromtools(tagId)
 {
@@ -269,16 +271,16 @@ function gettagIdfromtools(tagId)
 }
 
 const trackButtonElement = document.querySelector("#track");
-// trackButtonElement.addEventListener("click", handletrack);
+trackButtonElement.addEventListener("click", handletrack);
+
 
 function handletrack() {
-  console.log("tracking...")
-  gettagIdfromtools()
+console.log("tracking...")
+gettagIdfromtools();
+window.open("https://tomas-tp-front.herokuapp.com/");
 }
 
-
-// function handletrack() {
-//   fetch("http://jarvas-api.herokuapp.com/location?x=3&y=4", {
+//   fetch("https://tomas-tp-front.herokuapp.com/", {
 //     method: "POST"
 //   })
 //     .then(res => {
