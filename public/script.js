@@ -226,7 +226,7 @@ getTools();
 // LED & BUZZER
 function turnpingON() {
   console.log("pinging ON...")
-  fetch("http://172.20.10.12/LED=ON", {
+  fetch("https://172.20.10.12/LED=ON", {
     method: "GET"
   })
     .then(res => {
@@ -242,7 +242,7 @@ function turnpingON() {
 
 function turnpingOFF() {
   console.log("pinging OFF...")
-  fetch("http://172.20.10.12/LED=OFF", {
+  fetch("https://172.20.10.12/LED=OFF", {
     method: "GET"
   })
     .then(res => {
