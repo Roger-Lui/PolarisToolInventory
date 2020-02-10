@@ -78,13 +78,20 @@ function showDetail(itemData) {
         deleteButtonElement.classList.remove("hide");
       }
 
-      const ping = document.querySelector('.button-ping[data-action= "ping"]');
+      const pingON = document.querySelector('.button-pingON[data-action="pingON"]');
+      isPingONButtonHidden = pingON.classList.contains("hide");
 
-      isPingButtonHidden = ping.classList.contains("hide");
-
-      if (isPingButtonHidden) {
-        ping.classList.remove("hide");
+      if (isPingONButtonHidden) {
+        pingON.classList.remove("hide");
       }
+
+      const pingOFF = document.querySelector('.button-pingOFF[data-action="pingOFF"]');
+      isPingOFFButtonHidden = pingOFF.classList.contains("hide");
+
+      if (isPingOFFButtonHidden) {
+        pingOFF.classList.remove("hide");
+      }
+
 
       const track = document.querySelector(
         '.button-track[data-action="track"]'
@@ -107,8 +114,10 @@ function showDetail(itemData) {
         editButtonElement.dataset.dbId = value;
         deleteButtonElement.dataset.dbId = value;
         deleteButtonElement.addEventListener("click", handleDelete);
-        ping.dataset.dbId = value;
-        ping.addEventListener("click", handlePing2); 
+        pingON.dataset.dbId = value;
+        pingON.addEventListener("click", turnpingON); 
+        pingOFF.dataset.dbId = value;
+        pingOFF.addEventListener("click", turnpingOFF); 
         track.dataset.dbId = value;
         track.addEventListener("click", handletrack); 
         return;
@@ -214,11 +223,26 @@ getTools();
 // }
 
 
-// 
+// LED & BUZZER
+function turnpingON() {
+  console.log("pinging ON...")
+  fetch("http://172.20.10.12/LED=ON", {
+    method: "GET"
+  })
+    .then(res => {
+      console.log(res.status);
+    })
+    .catch(err =>
+      console.error(
+        "something went wrong when pinging. Response is not 200. Error: ",
+        err
+      )
+    );
+}
 
-function handlePing2() {
-  console.log("pinging...")
-  fetch("http://172.20.10.9/LED=ON", {
+function turnpingOFF() {
+  console.log("pinging OFF...")
+  fetch("http://172.20.10.12/LED=OFF", {
     method: "GET"
   })
     .then(res => {
@@ -251,24 +275,24 @@ function handlePing2() {
 
 // }
 
-function gettagIdfromtools(tagId)
-{
-  console.log("Retrieving Data From DataBase...")
-  fetch(`/tools?tagId=${tagId}`)
+// function gettagIdfromtools(tagId)
+// {
+//   console.log("Retrieving Data From DataBase...")
+//   fetch(`/tools?tagId=${tagId}`)
   
-    .then(response => response.json())
-    .then(data => {
-      sendIpaddress(data.tagId);
-      console.log(data.tagId)
-    })
-    .catch(err =>
-      console.error(
-        "something went wrong when getting RSSI coords. Error: ",
-        err  
-      )
-    );
+//     .then(response => response.json())
+//     .then(data => {
+//       sendIpaddress(data.tagId);
+//       console.log(data.tagId)
+//     })
+//     .catch(err =>
+//       console.error(
+//         "something went wrong when getting RSSI coords. Error: ",
+//         err  
+//       )
+//     );
 
-}
+// }
 
 const trackButtonElement = document.querySelector("#track");
 trackButtonElement.addEventListener("click", handletrack);
@@ -309,3 +333,5 @@ function back() {
   window.open("index.html");
   window.close("login.html");
 }
+
+

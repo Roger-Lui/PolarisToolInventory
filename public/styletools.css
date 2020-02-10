@@ -138,6 +138,32 @@ nav ul li a:hover
 	
 }
 
+.button-pingON{
+	background-color: transparent;
+	padding: 5px 10px;
+	border-radius: 4px;
+	border: 1px solid rgb(5, 255, 5);
+	color: white;
+}
+
+.button-pingON:hover
+{
+	background-color: rgba(21, 255, 13, 0.671);
+}
+
+.button-pingOFF{
+	background-color: transparent;
+	padding: 5px 10px;
+	border-radius: 4px;
+	border: 1px solid rgb(248, 6, 6);
+	color: white;
+}
+
+.button-pingOFF:hover
+{
+	background-color: rgba(250, 12, 3, 0.671);
+}
+
 
 /* --------ABOUT MENU-------- */
 ul.about{
