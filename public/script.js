@@ -49,19 +49,12 @@ function handleDelete(event) {
 
 function showDetail(itemData) {
   window.location.hash = itemData.rowid;
-  // {
-  //   name: 'something'
-  //   toolsextradetails: 'something'
-  // }
 
   delete itemData.toolName;
   delete itemData.RSSI;
 
   const keyValuePairs = Object.entries(itemData);
-  // [
-  //   ['name', 'something'],
-  //   ['toolsextradetails', 'something']
-  // ]
+
 
   keyValuePairs.map(([key, value]) => {
     const editButtonElement = document.querySelector(
@@ -81,23 +74,23 @@ function showDetail(itemData) {
       deleteButtonElement.classList.remove("hide");
     }
 
-    const pingON = document.querySelector(
-      '.button-pingON[data-action="pingON"]'
-    );
-    isPingONButtonHidden = pingON.classList.contains("hide");
+    // const pingON = document.querySelector(
+    //   '.button-pingON[data-action="pingON"]'
+    // );
+    // isPingONButtonHidden = pingON.classList.contains("hide");
 
-    if (isPingONButtonHidden) {
-      pingON.classList.remove("hide");
-    }
+    // if (isPingONButtonHidden) {
+    //   pingON.classList.remove("hide");
+    // }
 
-    const pingOFF = document.querySelector(
-      '.button-pingOFF[data-action="pingOFF"]'
-    );
-    isPingOFFButtonHidden = pingOFF.classList.contains("hide");
+    // const pingOFF = document.querySelector(
+    //   '.button-pingOFF[data-action="pingOFF"]'
+    // );
+    // isPingOFFButtonHidden = pingOFF.classList.contains("hide");
 
-    if (isPingOFFButtonHidden) {
-      pingOFF.classList.remove("hide");
-    }
+    // if (isPingOFFButtonHidden) {
+    //   pingOFF.classList.remove("hide");
+    // }
 
     const trackON = document.querySelector(
       '.button-trackON[data-action="trackON"]'
@@ -109,15 +102,15 @@ function showDetail(itemData) {
       trackON.classList.remove("hide");
     }
 
-    const trackOFF = document.querySelector(
-      '.button-trackOFF[data-action="trackOFF"]'
-    );
+    // const trackOFF = document.querySelector(
+    //   '.button-trackOFF[data-action="trackOFF"]'
+    // );
 
-    isTrackOFFButtonHidden = trackOFF.classList.contains("hide");
+    // isTrackOFFButtonHidden = trackOFF.classList.contains("hide");
 
-    if (isTrackONButtonHidden) {
-      trackOFF.classList.remove("hide");
-    }
+    // if (isTrackONButtonHidden) {
+    //   trackOFF.classList.remove("hide");
+    // }
 
     if (key === "rowid") {
       const sectionToolDetailElement = document.querySelector("#tool-detail");
@@ -125,6 +118,7 @@ function showDetail(itemData) {
       editButtonElement.dataset.dbId = value;
       deleteButtonElement.dataset.dbId = value;
       deleteButtonElement.addEventListener("click", handleDelete);
+      trackON.addEventListener("click", turntrackON);
       return;
     }
 
@@ -132,30 +126,30 @@ function showDetail(itemData) {
     elementToAppend.textContent = value;
 
     if (key === "tagId") {
-      pingON.removeEventListener("click", function() {
-        turnpingON(value);
-      });
-      pingON.addEventListener("click", function() {
-        turnpingON(value);
-      });
-      pingOFF.removeEventListener("click", function() {
-        turnpingOFF(value);
-      });
-      pingOFF.addEventListener("click", function() {
-        turnpingOFF(value);
-      });
+    //   pingON.removeEventListener("click", function() {
+    //     turnpingON(value);
+    //   });
+    //   pingON.addEventListener("click", function() {
+    //     turnpingON(value);
+    //   });
+    //   pingOFF.removeEventListener("click", function() {
+    //     turnpingOFF(value);
+    //   });
+    //   pingOFF.addEventListener("click", function() {
+    //     turnpingOFF(value);
+    //   });
       trackON.removeEventListener("click", function() {
         turntrackON(value);
       });
       trackON.addEventListener("click", function() {
         turntrackON(value);
       });
-      trackOFF.removeEventListener("click", function() {
-        turntrackOFF(value);
-      });
-      trackOFF.addEventListener("click", function() {
-        turntrackOFF(value);
-      });
+    //   trackOFF.removeEventListener("click", function() {
+    //     turntrackOFF(value);
+    //   });
+    //   trackOFF.addEventListener("click", function() {
+    //     turntrackOFF(value);
+    //   });
     }
 
     const parentElementToAppend = elementToAppend.parentElement; //apend stuff to the bottom
@@ -263,18 +257,18 @@ function turnpingOFF(tagId) {
 function turntrackON(tagId) {
   console.log("tracking ON...");
   window.open("https://tomas-tp-front.herokuapp.com/");
-  fetch(`http://${tagId}/TRACK=ON`, {
-    method: "POST"
-  })
-    .then(res => {
-      console.log(res.status);
-    })
-    .catch(err =>
-      console.error(
-        "something went wrong when tracking. Response is not 200. Error: ",
-        err
-      )
-    );
+  // fetch(`http://${tagId}/TRACK=ON`, {
+  //   method: "POST"
+  // })
+  //   .then(res => {
+  //     console.log(res.status);
+  //   })
+  //   .catch(err =>
+  //     console.error(
+  //       "something went wrong when tracking. Response is not 200. Error: ",
+  //       err
+  //     )
+  //   );
 }
 function turntrackOFF(tagId) {
   console.log("tracking OFF...");
