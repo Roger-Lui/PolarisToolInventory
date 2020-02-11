@@ -12,9 +12,7 @@ function updateModal(modalButtonElement) {
   const toolDetailDisplayedValues = Array.from(
     document.querySelectorAll(".tool-detail-item p")
   ).map(function(pElement) {
-    //.map -> go through every thing inside query and put function inside
     return pElement.textContent;
-    
   });
   const modalFormInputElements = document.querySelectorAll(".modal-form-input");
 
@@ -51,89 +49,123 @@ function handleDelete(event) {
 
 function showDetail(itemData) {
   window.location.hash = itemData.rowid;
-  console.log(itemData)
-  Object.entries(itemData)
-    .filter(keyValuePair => {
-      console.log(keyValuePair);
-      if (keyValuePair[0] !== "toolName" || keyValuePair[0] !== "RSSI")
-        return true;
-      return false;
-    })
-    .map(([key, value]) => {
-      console.log(key);
-      const editButtonElement = document.querySelector(
-        '.modal-button[data-action="update"]'
-      );
-      isEditButtonElementHidden = editButtonElement.classList.contains("hide");
-      if (isEditButtonElementHidden) {
-        editButtonElement.classList.remove("hide");
-      }
-      const deleteButtonElement = document.querySelector(
-        '.button-coral[data-action="delete"]'
-      );
-      isDeleteButtonElementHidden = deleteButtonElement.classList.contains(
-        "hide"
-      );
-      if (isDeleteButtonElementHidden) {
-        deleteButtonElement.classList.remove("hide");
-      }
+  // {
+  //   name: 'something'
+  //   toolsextradetails: 'something'
+  // }
 
-      const pingON = document.querySelector('.button-pingON[data-action="pingON"]');
-      isPingONButtonHidden = pingON.classList.contains("hide");
+  delete itemData.toolName;
+  delete itemData.RSSI;
 
-      if (isPingONButtonHidden) {
-        pingON.classList.remove("hide");
-      }
+  const keyValuePairs = Object.entries(itemData);
+  // [
+  //   ['name', 'something'],
+  //   ['toolsextradetails', 'something']
+  // ]
 
-      const pingOFF = document.querySelector('.button-pingOFF[data-action="pingOFF"]');
-      isPingOFFButtonHidden = pingOFF.classList.contains("hide");
+  keyValuePairs.map(([key, value]) => {
+    const editButtonElement = document.querySelector(
+      '.modal-button[data-action="update"]'
+    );
+    isEditButtonElementHidden = editButtonElement.classList.contains("hide");
+    if (isEditButtonElementHidden) {
+      editButtonElement.classList.remove("hide");
+    }
+    const deleteButtonElement = document.querySelector(
+      '.button-coral[data-action="delete"]'
+    );
+    isDeleteButtonElementHidden = deleteButtonElement.classList.contains(
+      "hide"
+    );
+    if (isDeleteButtonElementHidden) {
+      deleteButtonElement.classList.remove("hide");
+    }
 
-      if (isPingOFFButtonHidden) {
-        pingOFF.classList.remove("hide");
-      }
+    const pingON = document.querySelector(
+      '.button-pingON[data-action="pingON"]'
+    );
+    isPingONButtonHidden = pingON.classList.contains("hide");
 
+    if (isPingONButtonHidden) {
+      pingON.classList.remove("hide");
+    }
 
-      const track = document.querySelector(
-        '.button-track[data-action="track"]'
-      );
+    const pingOFF = document.querySelector(
+      '.button-pingOFF[data-action="pingOFF"]'
+    );
+    isPingOFFButtonHidden = pingOFF.classList.contains("hide");
 
-      isTrackButtonHidden = track.classList.contains("hide");
+    if (isPingOFFButtonHidden) {
+      pingOFF.classList.remove("hide");
+    }
 
-      if (isTrackButtonHidden) {
-        track.classList.remove("hide");
-      }
+    const trackON = document.querySelector(
+      '.button-trackON[data-action="trackON"]'
+    );
 
-      // if (key === "tagId") {
-      //   track.dataset.tagId = value;
-      //   return;
-      // }
+    isTrackONButtonHidden = trackON.classList.contains("hide");
 
-      if (key === "rowid") {
-        const sectionToolDetailElement = document.querySelector("#tool-detail");
-        sectionToolDetailElement.dataset.dbId = value;
-        editButtonElement.dataset.dbId = value;
-        deleteButtonElement.dataset.dbId = value;
-        deleteButtonElement.addEventListener("click", handleDelete);
-        pingON.dataset.dbId = value;
-        pingON.addEventListener("click", turnpingON); 
-        pingOFF.dataset.dbId = value;
-        pingOFF.addEventListener("click", turnpingOFF); 
-        track.dataset.dbId = value;
-        track.addEventListener("click", handletrack); 
-        return;
-      }
+    if (isTrackONButtonHidden) {
+      trackON.classList.remove("hide");
+    }
 
-      const elementToAppend = document.querySelector(`#${key}-js`); //backticks
-      elementToAppend.textContent = value;
+    const trackOFF = document.querySelector(
+      '.button-trackOFF[data-action="trackOFF"]'
+    );
 
-      const parentElementToAppend = elementToAppend.parentElement; //apend stuff to the bottom
-      const labelElement = parentElementToAppend.querySelector("h4");
-      const isLabelElementHidden = labelElement.classList.contains("hide");
+    isTrackOFFButtonHidden = trackOFF.classList.contains("hide");
 
-      if (isLabelElementHidden) {
-        labelElement.classList.remove("hide");
-      }
-    });
+    if (isTrackONButtonHidden) {
+      trackOFF.classList.remove("hide");
+    }
+
+    if (key === "rowid") {
+      const sectionToolDetailElement = document.querySelector("#tool-detail");
+      sectionToolDetailElement.dataset.dbId = value;
+      editButtonElement.dataset.dbId = value;
+      deleteButtonElement.dataset.dbId = value;
+      deleteButtonElement.addEventListener("click", handleDelete);
+      return;
+    }
+
+    const elementToAppend = document.querySelector(`#${key}-js`); //backticks
+    elementToAppend.textContent = value;
+
+    if (key === "tagId") {
+      pingON.removeEventListener("click", function() {
+        turnpingON(value);
+      });
+      pingON.addEventListener("click", function() {
+        turnpingON(value);
+      });
+      pingOFF.removeEventListener("click", function() {
+        turnpingOFF(value);
+      });
+      pingOFF.addEventListener("click", function() {
+        turnpingOFF(value);
+      });
+      trackON.removeEventListener("click", function() {
+        turntrackON(value);
+      });
+      trackON.addEventListener("click", function() {
+        turntrackON(value);
+      });
+      trackOFF.removeEventListener("click", function() {
+        turntrackOFF(value);
+      });
+      trackOFF.addEventListener("click", function() {
+        turntrackOFF(value);
+      });
+    }
+
+    const parentElementToAppend = elementToAppend.parentElement; //apend stuff to the bottom
+    const labelElement = parentElementToAppend.querySelector("h4");
+    const isLabelElementHidden = labelElement.classList.contains("hide");
+
+    if (isLabelElementHidden) {
+      labelElement.classList.remove("hide");
+    }
+  });
 }
 
 function getTools() {
@@ -174,34 +206,6 @@ function getTools() {
 }
 getTools();
 
-// function sendCoordsToJarvas(x, y) {
-//   fetch(`http://jarvas-api.herokuapp.com/location?x=${x}&y=${y}`, {
-//     method: "POST"
-//   })
-//     .then(res => {
-//       console.log(res.status);
-//     })
-//     .catch(err => {
-//       console.error(
-//         "something went wrong when sending coords to Jarvas: ",
-//         err
-//       );
-//     });
-// }
-
-// function getRSSIfromdb(tagId) {
-//   fetch(`/RSSI?tagId=${tagId}`)
-//     .then(response => response.json())
-//     .then(data => {
-//       sendCoordsToJarvas(data.Xreading, data.Yreading);
-//     })
-//     .catch(err =>
-//       console.error(
-//         "something went wrong when getting RSSI coords. Error: ",
-//         err
-//       )
-//     );
-// }
 // const pingButtonElement = document.querySelector("#ping");
 // pingButtonElement.addEventListener("click", handlePing);
 
@@ -224,99 +228,69 @@ getTools();
 
 
 // LED & BUZZER
-function turnpingON() {
-  console.log("pinging ON...")
-  fetch("https://172.20.10.12/LED=ON", {
-    method: "GET"
+function turnpingON(tagId) {
+  console.log("pinging ON...");
+  fetch(`http://${tagId}/LED=ON`, {
+    method: "POST"
   })
     .then(res => {
       console.log(res.status);
     })
     .catch(err =>
       console.error(
-        "something went wrong when pinging. Response is not 200. Error: ",
+        "something went wrong when turning ping on. Response is not 200. Error: ",
         err
       )
     );
 }
 
-function turnpingOFF() {
-  console.log("pinging OFF...")
-  fetch("https://172.20.10.12/LED=OFF", {
-    method: "GET"
+function turnpingOFF(tagId) {
+  console.log("pinging OFF...");
+  fetch(`http://${tagId}/LED=OFF`, {
+    method: "POST"
   })
     .then(res => {
       console.log(res.status);
     })
     .catch(err =>
       console.error(
-        "something went wrong when pinging. Response is not 200. Error: ",
+        "something went wrong when turning ping off. Response is not 200. Error: ",
         err
       )
     );
 }
 
-// // TRACK BUTTONS
-// function sendIpaddress(tagIP)
-// {
-//   console.log("posting...")
-//   fetch(`http://${tagIP}/1`, {
-//     method: "POST"
-//   })
-//   .then(res => {
-//     console.log(res.status);
-//   })
-//   .catch(err =>
-//     console.error(
-//       "something went wrong when sending to IP ADDRESS. Response is not 200. Error: ",
-//       err
-//     )
-//   );
-
-// }
-
-// function gettagIdfromtools(tagId)
-// {
-//   console.log("Retrieving Data From DataBase...")
-//   fetch(`/tools?tagId=${tagId}`)
-  
-//     .then(response => response.json())
-//     .then(data => {
-//       sendIpaddress(data.tagId);
-//       console.log(data.tagId)
-//     })
-//     .catch(err =>
-//       console.error(
-//         "something went wrong when getting RSSI coords. Error: ",
-//         err  
-//       )
-//     );
-
-// }
-
-const trackButtonElement = document.querySelector("#track");
-trackButtonElement.addEventListener("click", handletrack);
-
-
-function handletrack() {
-console.log("tracking...")
-gettagIdfromtools();
-window.open("https://tomas-tp-front.herokuapp.com/");
+function turntrackON(tagId) {
+  console.log("tracking ON...");
+  window.open("https://tomas-tp-front.herokuapp.com/");
+  fetch(`http://${tagId}/TRACK=ON`, {
+    method: "POST"
+  })
+    .then(res => {
+      console.log(res.status);
+    })
+    .catch(err =>
+      console.error(
+        "something went wrong when tracking. Response is not 200. Error: ",
+        err
+      )
+    );
 }
-
-//   fetch("https://tomas-tp-front.herokuapp.com/", {
-//     method: "POST"
-//   })
-//     .then(res => {
-//       console.log(res.status);
-//     })
-//     .catch(err =>
-//       console.error(
-//         "something went wrong when pinging. Response is not 200. Error: ",
-//         err
-//       )
-//     );
-// }
+function turntrackOFF(tagId) {
+  console.log("tracking OFF...");
+  fetch(`http://${tagId}/TRACK=OFF`, {
+    method: "POST"
+  })
+    .then(res => {
+      console.log(res.status);
+    })
+    .catch(err =>
+      console.error(
+        "something went wrong when tracking. Response is not 200. Error: ",
+        err
+      )
+    );
+}
 
 function check(form) {
   /*function to check userid & password*/
@@ -333,5 +307,3 @@ function back() {
   window.open("index.html");
   window.close("login.html");
 }
-
-

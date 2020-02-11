@@ -11,7 +11,7 @@ html, body {
 }
 
 body{
-	background-image: url("./4.jpg");
+	background-image: url("./1.jpg");
 	background-size: cover;
 	background-position: center;
 }
@@ -29,7 +29,7 @@ h1 {
  font-family: Century Gothic;
  font-size: 3.5em;
  text-align: left;
- font-weight: bold;
+ font-weight: bold; 
 }
 
 h2 {
@@ -88,7 +88,7 @@ nav ul li a:hover
 }
 
 .button-coral {
-	background-color: transparent;
+	background-color: black;
 	padding: 5px 10px;
 	border-radius: 4px;
 	border: 1px solid rgb(128, 227, 240);
@@ -97,11 +97,11 @@ nav ul li a:hover
 }
 
 .button-coral:hover {
-	background-color: rgba(137, 221, 241, 0.671);
+	background-color: rgba(86, 102, 243, 0.671);
 	color: black;
 }
 
-.button-ping
+/* .button-ping
 {
 	background-color: transparent;
 	padding: 5px 10px;
@@ -109,37 +109,49 @@ nav ul li a:hover
 	border: 1px solid rgb(128, 227, 240);
 	color: white;
 	
-}
+} */
 
 .button-ping:hover
 {
 	background-color: rgba(137, 221, 241, 0.671);
 }
 
-.button-track
+.button-trackON
 {
-	background-color: transparent;
+	background-color: black;
 	padding: 5px 10px;
 	border-radius: 4px;
-	border: 1px solid rgb(128, 227, 240);
+	border: 1px solid rgb(36, 253, 47);
 	color: white;
 	
 }
-.button-track:hover
+.button-trackON:hover
 {
-	background-color: rgba(137, 221, 241, 0.671);
+	background-color: rgba(59, 248, 42, 0.616);
 	
 }
 
-.buttonsindetaillist{
+.button-trackOFF
+{
+	background-color: black;
+	padding: 5px 10px;
+	border-radius: 4px;
+	border: 1px solid rgb(252, 7, 7);
+	color: white;
 	
-	position: absolute;
-	left: 58.5em;
-	
+}
+.button-trackOFF:hover
+{
+	background-color: rgba(255, 15, 15, 0.616);
+}
+
+.tool-detail-buttons-set {
+	margin-top: 15px;
+	margin-left: 7.5em;
 }
 
 .button-pingON{
-	background-color: transparent;
+	background-color: rgb(70, 245, 35);
 	padding: 5px 10px;
 	border-radius: 4px;
 	border: 1px solid rgb(5, 255, 5);
@@ -152,7 +164,7 @@ nav ul li a:hover
 }
 
 .button-pingOFF{
-	background-color: transparent;
+	background-color: rgb(245, 20, 20);
 	padding: 5px 10px;
 	border-radius: 4px;
 	border: 1px solid rgb(248, 6, 6);
@@ -238,7 +250,7 @@ ul.about li a:hover
 .tool-detail-list {
 	list-style: none;
 	margin-top: 3px;
-	margin-left: 10em;
+	margin-left: 7em;
 	font-size: 17px;
 	
 }
@@ -275,7 +287,7 @@ align-items: center;
 
 .modal-body {
 	width: 50%;
-	height: 650px;
+	height: 575px;
 	padding: 20px 15px;
 	background-color: white;
 	border-radius: 5px;

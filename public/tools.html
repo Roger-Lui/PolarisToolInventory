@@ -54,18 +54,21 @@
 						<h4 class="hide">EXTRA DETAILS</h4>		
 						<p id="toolsextradetails-js"></p>
 					</li>
-					<li class="tool-detail-item">
+					<!-- <li class="tool-detail-item">
 						<h4 class="hide">TAG IP ADDRESS</h4>		
 						<p id="tagId-js"></p>
-					</li>
+					</li> -->
 					
 				</ul>
-				<div class="buttonsindetaillist">
-				<button class="button-coral modal-button hide" data-action="update" type="button">Edit</button>
-				<button class="button-coral hide" data-action="delete" type="button">Delete</button>
-				<button class="button-pingON hide" data-action="pingON" type="button">ON</button>
-				<button class="button-pingOFF hide" data-action="pingOFF" type="button">OFF</button>
-				<button class="button-track hide" data-action="track" type="button">Track</button>
+				<div class="tool-detail-buttons-set">
+					<button class="button-coral modal-button hide" data-action="update" type="button">Edit</button>
+					<button class="button-coral hide" data-action="delete" type="button">Delete</button>
+				</div>
+				<div class="tool-detail-buttons-set">
+					<button class="button-pingON hide" data-action="pingON" type="button">ON</button>
+					<button class="button-pingOFF hide" data-action="pingOFF" type="button">OFF</button>
+					<button class="button-trackON hide" data-action="trackON" type="button">Track ON</button>
+					<button class="button-trackOFF hide" data-action="trackOFF" type="button">Track OFF</button>
 				</div>
 			</section>
 		</div>
@@ -89,8 +92,8 @@
 					<input class="modal-form-input" type="text" name="nextCalibration" placeholder="Please Enter Date" required> 
 					<label class="modal-form-input-label" for="toolDetails">Tool's Extra Details </label> 
 					<input class="modal-form-input" type="text" name="toolsextradetails" placeholder="Tool's Extra Details" required>
-					<label class="modal-form-input-label" for="tagId">Tag Ip Address</label> 
-					<input class="modal-form-input" type="text" name="tagId" placeholder="Tag's IP Address" required>
+					<!-- <label class="modal-form-input-label" for="tagId">Tag Ip Address</label> 
+					<input class="modal-form-input" type="text" name="tagId" placeholder="Tag's IP Address" required> -->
 					<input class="modal-form-submit" type="submit" value="Create" data-db-id=""/>
 				</form>
 			</div>

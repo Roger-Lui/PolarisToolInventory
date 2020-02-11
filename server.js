@@ -2,7 +2,7 @@ var express = require("express");
 var app = express();
 var sqlite3 = require("sqlite3");
 var db = new sqlite3.Database("db/tools.db");
-var db2 = new sqlite3.Database("db/RSSIreadings.db");
+// var db2 = new sqlite3.Database("db/RSSIreadings.db");
 var bodyParser = require("body-parser");
 var methodOverride = require("method-override");
 
@@ -133,7 +133,7 @@ app.delete("/tools", function(request, response) {
 //   console.log(queryParams);
 
 //   db2.exec(
-//     `INSERT INTO RSSI (Xreading, Yreading, tagId) VALUES(${queryParams.x},${queryParams.y}, ${queryParams.tagId}) 
+//     `INSERT INTO RSSI (Xreading, Yreading, tagId) VALUES(${queryParams.x},${queryParams.y}, ${queryParams.tagId})
 //     ON CONFLICT(tagId) DO UPDATE SET Xreading=${queryParams.x} , Yreading=${queryParams.y}`,
 //     function(err) {
 //       if (err) {
@@ -148,9 +148,7 @@ app.delete("/tools", function(request, response) {
 //   );
 // });
 
-
 app.listen(process.env.PORT || 3000, function() {
   const portNumber = process.env.PORT || 3000;
   console.log("Server is running on: " + portNumber);
 });
-
