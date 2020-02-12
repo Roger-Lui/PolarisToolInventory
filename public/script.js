@@ -92,15 +92,15 @@ function showDetail(itemData) {
     //   pingOFF.classList.remove("hide");
     // }
 
-    const trackON = document.querySelector(
-      '.button-trackON[data-action="trackON"]'
-    );
+    // const trackON = document.querySelector(
+    //   '.button-trackON[data-action="trackON"]'
+    // );
 
-    isTrackONButtonHidden = trackON.classList.contains("hide");
+    // isTrackONButtonHidden = trackON.classList.contains("hide");
 
-    if (isTrackONButtonHidden) {
-      trackON.classList.remove("hide");
-    }
+    // if (isTrackONButtonHidden) {
+    //   trackON.classList.remove("hide");
+    // }
 
     // const trackOFF = document.querySelector(
     //   '.button-trackOFF[data-action="trackOFF"]'
@@ -118,14 +118,13 @@ function showDetail(itemData) {
       editButtonElement.dataset.dbId = value;
       deleteButtonElement.dataset.dbId = value;
       deleteButtonElement.addEventListener("click", handleDelete);
-      trackON.addEventListener("click", turntrackON);
       return;
     }
 
     const elementToAppend = document.querySelector(`#${key}-js`); //backticks
     elementToAppend.textContent = value;
 
-    if (key === "tagId") {
+    // if (key === "tagId") {
     //   pingON.removeEventListener("click", function() {
     //     turnpingON(value);
     //   });
@@ -138,19 +137,19 @@ function showDetail(itemData) {
     //   pingOFF.addEventListener("click", function() {
     //     turnpingOFF(value);
     //   });
-      trackON.removeEventListener("click", function() {
-        turntrackON(value);
-      });
-      trackON.addEventListener("click", function() {
-        turntrackON(value);
-      });
+    //   trackON.removeEventListener("click", function() {
+    //     turntrackON(value);
+    //   });
+    //   trackON.addEventListener("click", function() {
+    //     turntrackON(value);
+    //   });
     //   trackOFF.removeEventListener("click", function() {
     //     turntrackOFF(value);
     //   });
     //   trackOFF.addEventListener("click", function() {
     //     turntrackOFF(value);
     //   });
-    }
+    // }
 
     const parentElementToAppend = elementToAppend.parentElement; //apend stuff to the bottom
     const labelElement = parentElementToAppend.querySelector("h4");
@@ -221,70 +220,70 @@ getTools();
 // }
 
 
-// LED & BUZZER
-function turnpingON(tagId) {
-  console.log("pinging ON...");
-  fetch(`http://${tagId}/LED=ON`, {
-    method: "POST"
-  })
-    .then(res => {
-      console.log(res.status);
-    })
-    .catch(err =>
-      console.error(
-        "something went wrong when turning ping on. Response is not 200. Error: ",
-        err
-      )
-    );
-}
+// // LED & BUZZER
+// function turnpingON(tagId) {
+//   console.log("pinging ON...");
+//   fetch(`http://${tagId}/LED=ON`, {
+//     method: "POST"
+//   })
+//     .then(res => {
+//       console.log(res.status);
+//     })
+//     .catch(err =>
+//       console.error(
+//         "something went wrong when turning ping on. Response is not 200. Error: ",
+//         err
+//       )
+//     );
+// }
 
-function turnpingOFF(tagId) {
-  console.log("pinging OFF...");
-  fetch(`http://${tagId}/LED=OFF`, {
-    method: "POST"
-  })
-    .then(res => {
-      console.log(res.status);
-    })
-    .catch(err =>
-      console.error(
-        "something went wrong when turning ping off. Response is not 200. Error: ",
-        err
-      )
-    );
-}
+// function turnpingOFF(tagId) {
+//   console.log("pinging OFF...");
+//   fetch(`http://${tagId}/LED=OFF`, {
+//     method: "POST"
+//   })
+//     .then(res => {
+//       console.log(res.status);
+//     })
+//     .catch(err =>
+//       console.error(
+//         "something went wrong when turning ping off. Response is not 200. Error: ",
+//         err
+//       )
+//     );
+// }
 
-function turntrackON(tagId) {
-  console.log("tracking ON...");
-  window.open("https://tomas-tp-front.herokuapp.com/");
-  // fetch(`http://${tagId}/TRACK=ON`, {
-  //   method: "POST"
-  // })
-  //   .then(res => {
-  //     console.log(res.status);
-  //   })
-  //   .catch(err =>
-  //     console.error(
-  //       "something went wrong when tracking. Response is not 200. Error: ",
-  //       err
-  //     )
-  //   );
-}
-function turntrackOFF(tagId) {
-  console.log("tracking OFF...");
-  fetch(`http://${tagId}/TRACK=OFF`, {
-    method: "POST"
-  })
-    .then(res => {
-      console.log(res.status);
-    })
-    .catch(err =>
-      console.error(
-        "something went wrong when tracking. Response is not 200. Error: ",
-        err
-      )
-    );
-}
+// function turntrackON(tagId) {
+//   console.log("tracking ON...");
+//   window.open("https://tomas-tp-front.herokuapp.com/");
+//   fetch(`http://${tagId}/TRACK=ON`, {
+//     method: "POST"
+//   })
+//     .then(res => {
+//       console.log(res.status);
+//     })
+//     .catch(err =>
+//       console.error(
+//         "something went wrong when tracking. Response is not 200. Error: ",
+//         err
+//       )
+//     );
+// }
+// function turntrackOFF(tagId) {
+//   console.log("tracking OFF...");
+//   fetch(`http://${tagId}/TRACK=OFF`, {
+//     method: "POST"
+//   })
+//     .then(res => {
+//       console.log(res.status);
+//     })
+//     .catch(err =>
+//       console.error(
+//         "something went wrong when tracking. Response is not 200. Error: ",
+//         err
+//       )
+//     );
+// }
 
 function check(form) {
   /*function to check userid & password*/
